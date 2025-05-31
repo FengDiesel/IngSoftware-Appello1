@@ -1,0 +1,19 @@
+# Output compilazione
+bin/
+*.class
+
+# File IDE comuni
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.classpath
+.project
+
+# File macOS
+.DS_Store
+
+# Backup temporanei
+*.swp
+*~
