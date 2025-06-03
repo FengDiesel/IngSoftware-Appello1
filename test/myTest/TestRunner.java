@@ -24,5 +24,11 @@ public class TestRunner {
         } else {
             System.out.println("Tutti i test sono passati.");
         }
+
+        for (Failure failure : result.getFailures()) {
+    System.out.println(failure.toString());
+    failure.getException().printStackTrace(); // <--- AGGIUNGI QUESTO
+}
+
     }
 }

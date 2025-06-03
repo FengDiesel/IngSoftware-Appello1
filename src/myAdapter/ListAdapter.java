@@ -19,6 +19,60 @@ public class ListAdapter implements HList, HCollection {
         delegate = new Vector(capacity);
     }
 
+    private class ListIteratorAdapter implements HListIterator {
+        int cursor;
+        int lastRet = -1;
+
+        public ListIteratorAdapter(int index) {
+            this.cursor = index;
+        }
+
+        public boolean hasNext() {
+            return cursor < delegate.size();
+        }
+
+        public Object next() {
+            if (!hasNext()) throw new java.util.NoSuchElementException();
+            lastRet = cursor;
+            return delegate.elementAt(cursor++);
+        }
+
+        public boolean hasPrevious() {
+            return cursor > 0;
+        }
+
+        public Object previous() {
+            if (!hasPrevious()) throw new java.util.NoSuchElementException();
+            lastRet = --cursor;
+            return delegate.elementAt(cursor);
+        }
+
+        public int nextIndex() {
+            return cursor;
+        }
+
+        public int previousIndex() {
+            return cursor - 1;
+        }
+
+        public void remove() {
+            if (lastRet < 0) throw new IllegalStateException();
+            delegate.removeElementAt(lastRet);
+            if (lastRet < cursor) cursor--;
+            lastRet = -1;
+        }
+
+        public void set(Object o) {
+            if (lastRet < 0) throw new IllegalStateException();
+            delegate.setElementAt(o, lastRet);
+        }
+
+        public void add(Object o) {
+            delegate.insertElementAt(o, cursor++);
+            lastRet = -1;
+        }
+    }
+
     // HCollection
 
     @Override
@@ -43,36 +97,30 @@ public class ListAdapter implements HList, HCollection {
     }
 
     private class IteratorAdapter implements HIterator {
-        private int cursor = 0;
-        private boolean canRemove = false;
+        int cursor = 0;
+        int lastRet = -1;
 
-        @Override
         public boolean hasNext() {
             return cursor < delegate.size();
         }
 
-        @Override
         public Object next() {
-            if (!hasNext()) {
+            if (cursor >= delegate.size()) {
                 throw new java.util.NoSuchElementException();
             }
-            Object next = delegate.elementAt(cursor);
-            cursor++;
-            canRemove = true;
-            return next;
+            lastRet = cursor;
+            return delegate.elementAt(cursor++);
         }
 
-        @Override
         public void remove() {
-            if (!canRemove) {
+            if (lastRet < 0) {
                 throw new IllegalStateException();
             }
-            delegate.removeElementAt(--cursor);
-            canRemove = false;
+            delegate.removeElementAt(lastRet);
+            cursor = lastRet;
+            lastRet = -1;
         }
     }
-    ///////////////////////////
-
 
     @Override
     public Object[] toArray() {
@@ -194,6 +242,7 @@ public class ListAdapter implements HList, HCollection {
             Object obj = get(i);
             hash = 31 * hash + (obj == null ? 0 : obj.hashCode());
         }
+        
         return hash;
     }
 
@@ -203,12 +252,18 @@ public class ListAdapter implements HList, HCollection {
         if (index < 0 || index >= delegate.size()) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + delegate.size());
         }
-    return delegate.elementAt(index);
-}
 
+        return delegate.elementAt(index);
+    }
 
+    @Override
     public Object set(int index, Object element) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (index < 0 || index >= delegate.size()) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + delegate.size());
+        }
+        Object old = delegate.elementAt(index);
+        delegate.setElementAt(element, index);
+        return old;
     }
 
     @Override
@@ -251,16 +306,22 @@ public class ListAdapter implements HList, HCollection {
         return -1;
     }
 
+    @Override
     public HListIterator listIterator() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new ListIteratorAdapter(0);
     }
 
+    @Override
     public HListIterator listIterator(int index) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException("Index: " + index);
+        }
+        return new ListIteratorAdapter(index);
     }
 
+    @Override
     public HList subList(int fromIndex, int toIndex) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new SubListAdapter(this, fromIndex, toIndex);
     }
 
     public boolean addAll(int index, HCollection c) {

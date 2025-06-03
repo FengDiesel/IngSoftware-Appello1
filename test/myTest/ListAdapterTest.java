@@ -5,7 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import myAdapter.HCollection;
+import myAdapter.HIterator;
 import myAdapter.HList;
+import myAdapter.HListIterator;
 import myAdapter.ListAdapter;
 
 /**
@@ -243,6 +245,117 @@ public class ListAdapterTest {
         assertNotSame("Deve restituire un nuovo array se troppo piccolo", arr2, result2);
         assertEquals("X", result2[0]);
         assertEquals("Y", result2[1]);
+    }
+
+    @Test
+    public void testIterator() {
+        list.add("A");
+        list.add("B");
+        list.add("C");
+
+        HIterator it = list.iterator();
+        assertTrue(it.hasNext());
+        assertEquals("A", it.next());
+        assertTrue(it.hasNext());
+        assertEquals("B", it.next());
+        assertTrue(it.hasNext());
+        assertEquals("C", it.next());
+        assertFalse(it.hasNext());
+    }
+
+    @Test(expected = java.util.NoSuchElementException.class)
+    public void testIteratorNextNoSuchElement() {
+        list.add("X");
+        HIterator it = list.iterator();
+        it.next(); // OK
+        it.next(); // boom
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testIteratorRemoveBeforeNext() {
+        list.add("Y");
+        HIterator it = list.iterator();
+        it.remove(); // boom
+    }
+
+    @Test
+    public void testIteratorRemove() {
+        list.add("1");
+        list.add("2");
+        HIterator it = list.iterator();
+        it.next();      // "1"
+        it.remove();    // rimuove "1"
+        assertEquals(1, list.size());
+        assertEquals("2", list.get(0));
+    }
+
+    @Test
+    public void testListIteratorForwardBackward() {
+        list.add("A");
+        list.add("B");
+        list.add("C");
+
+        HListIterator it = list.listIterator();
+        assertTrue(it.hasNext());
+        assertEquals("A", it.next());
+        assertEquals("B", it.next());
+        assertTrue(it.hasPrevious());
+        assertEquals("B", it.previous());
+        assertEquals("A", it.previous());
+        assertFalse(it.hasPrevious());
+    }
+
+    @Test
+    public void testListIteratorAddSetRemove() {
+        HListIterator it = list.listIterator();
+        it.add("X");
+        assertEquals(1, list.size());
+        assertEquals("X", list.get(0));
+
+        it = list.listIterator();
+        assertEquals("X", it.next());
+        it.set("Y");
+        assertEquals("Y", list.get(0));
+
+        it.remove();
+        assertTrue(list.isEmpty());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testListIteratorSetBeforeNext() {
+        list.add("A");
+        HListIterator it = list.listIterator();
+        it.set("B"); // boom
+    }
+
+    @Test(expected = java.util.NoSuchElementException.class)
+    public void testListIteratorNextTooFar() {
+        list.add("A");
+        HListIterator it = list.listIterator();
+        it.next(); // OK
+        it.next(); // boom
+    }
+
+    @Test
+    public void testSubListView() {
+        list.add("A");
+        list.add("B");
+        list.add("C");
+        list.add("D");
+
+        HList sub = list.subList(1, 3); // ["B", "C"]
+
+        assertEquals(2, sub.size());
+        assertEquals("B", sub.get(0));
+        assertEquals("C", sub.get(1));
+
+        sub.remove(0); // rimuove "B"
+        assertEquals(3, list.size());
+        assertEquals("C", list.get(1));
+
+        list.set(2, "Z"); // modifica "D" → "Z"
+        assertEquals("Z", list.get(2));
+        assertEquals("Z", sub.get(1)); // riflessa nella subList
     }
 
 
