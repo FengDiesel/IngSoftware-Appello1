@@ -344,19 +344,44 @@ public class ListAdapterTest {
         list.add("D");
 
         HList sub = list.subList(1, 3); // ["B", "C"]
-
         assertEquals(2, sub.size());
         assertEquals("B", sub.get(0));
         assertEquals("C", sub.get(1));
 
         sub.remove(0); // rimuove "B"
+
         assertEquals(3, list.size());
         assertEquals("C", list.get(1));
+        assertEquals(1, sub.size());
+        assertEquals("C", sub.get(0));
 
         list.set(2, "Z"); // modifica "D" → "Z"
-        assertEquals("Z", list.get(2));
-        assertEquals("Z", sub.get(1)); // riflessa nella subList
+        assertEquals("Z", list.get(2)); // OK
+        // sub non contiene più "D", quindi non serve verificarlo in sub
     }
 
+    @Test
+    public void testAddAllAtIndex() {
+        list.add("A");
+        list.add("D");
+
+        HCollection toAdd = new ListAdapter();
+        toAdd.add("B");
+        toAdd.add("C");
+
+        assertTrue(list.addAll(1, toAdd));
+        assertEquals(4, list.size());
+        assertEquals("A", list.get(0));
+        assertEquals("B", list.get(1));
+        assertEquals("C", list.get(2));
+        assertEquals("D", list.get(3));
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testAddAllAtInvalidIndex() {
+        HCollection c = new ListAdapter();
+        c.add("X");
+        list.addAll(1, c); // lista vuota → index = 1 non valido
+    }
 
 }

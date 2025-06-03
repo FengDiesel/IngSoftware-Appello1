@@ -324,8 +324,21 @@ public class ListAdapter implements HList, HCollection {
         return new SubListAdapter(this, fromIndex, toIndex);
     }
 
+    @Override
     public boolean addAll(int index, HCollection c) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException("Index: " + index);
+        }
+
+        HIterator it = c.iterator();
+        int i = 0;
+        while (it.hasNext()) {
+            this.add(index + i, it.next()); // usa add(index + i, obj)
+            i++;
+        }
+
+        return i > 0;
     }
+
 }
 
