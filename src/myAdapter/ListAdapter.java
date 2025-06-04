@@ -4,7 +4,7 @@ import java.util.Vector;
 
 /**
  * Adapter della classe {@link Vector} che implementa {@link HList} e {@link HCollection}.
- * Compatibile con la specifica Java 1.4.2 e CLDC 1.1.
+ * Compatibile con le specifiche Java 1.4.2 e CLDC 1.1.
  */
 
 public class ListAdapter implements HList, HCollection {
@@ -81,6 +81,7 @@ public class ListAdapter implements HList, HCollection {
             delegate.insertElementAt(o, cursor++);
             lastRet = -1;
         }
+
     }
 
     //  HCollection  \\
@@ -150,6 +151,7 @@ public class ListAdapter implements HList, HCollection {
             lastRet = -1;
         }
     }
+
 
     /**
      * Restituisce un array contenente tutti gli elementi della lista.
@@ -273,9 +275,7 @@ public class ListAdapter implements HList, HCollection {
             if (!c.contains(elem)) {
                 delegate.removeElementAt(i);
                 modified = true;
-            } else {
-                i++;
-            }
+            } else i++;
         }
         return modified;
     }
@@ -295,12 +295,10 @@ public class ListAdapter implements HList, HCollection {
         HList other = (HList) o;
         if (size() != other.size()) return false;
 
-        for (int i = 0; i < size(); i++) {
+        for (int i=0; i<size(); i++) {
             Object e1 = get(i);
             Object e2 = other.get(i);
-            if (e1 == null ? e2 != null : !e1.equals(e2)) {
-                return false;
-            }
+            if (e1 == null ? e2 != null : !e1.equals(e2)) return false;
         }
         return true;
     }
@@ -393,6 +391,7 @@ public class ListAdapter implements HList, HCollection {
                 return i;
             }
         }
+        
         return -1;
     }
 
@@ -403,7 +402,7 @@ public class ListAdapter implements HList, HCollection {
      */
     @Override
     public int lastIndexOf(Object o) {
-        for (int i = delegate.size() - 1; i >= 0; i--) {
+        for (int i = delegate.size() - 1; i>= 0; i--) {
             Object e = delegate.elementAt(i);
             if (e == null ? o == null : e.equals(o)) {
                 return i;
@@ -463,7 +462,7 @@ public class ListAdapter implements HList, HCollection {
         HIterator it = c.iterator();
         int i = 0;
         while (it.hasNext()) {
-            this.add(index + i, it.next()); // usa add(index + i, obj)
+            this.add(index + i, it.next()); //
             i++;
         }
 

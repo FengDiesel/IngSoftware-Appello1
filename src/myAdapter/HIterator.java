@@ -1,14 +1,29 @@
 package myAdapter;
 
 /**
- * Interfaccia equivalente a java.util.Iterator (J2SE 1.4.2)
- * https://www2.cs.duke.edu/csed/java/jdk1.4.2/docs/api/index.html
+ * Interfaccia per l'iterazione su una collezione compatibile con Java 1.4.
+ * Simula {@code java.util.Iterator}
  */
 
 public interface HIterator {
 
+    /**
+     * Verifica se ci sono altri elementi da iterare.
+     * @return {@code true} se presenti altri elementi
+     */
     boolean hasNext();
-    Object next();
-    void remove();
 
+
+    /**
+     * Restituisce l'elemento successivo.
+     * @return elemento successivo
+     * @throws java.util.NoSuchElementException se non ci sono altri elementi
+     */
+    Object next();
+
+    /**
+     * Rimuove l'ultimo elemento restituito da {@code next()}.
+     * @throws IllegalStateException se {@code next()} non è ancora stato chiamato
+     */
+    void remove();
 }
