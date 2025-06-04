@@ -3,8 +3,8 @@ package myAdapter;
 import java.util.Vector;
 
 /**
- * Adapter della collezione Vector compatibile con HList e HCollection.
- * I metodi sono inizialmente non implementati (throw new UnsupportedOperationException).
+ * Adapter della classe {@link Vector} che implementa {@link HList} e {@link HCollection}.
+ * Compatibile con la specifica Java 1.4.2 e CLDC 1.1.
  */
 
 public class ListAdapter implements HList, HCollection {
