@@ -11,14 +11,24 @@ public class ListAdapter implements HList, HCollection {
 
     private Vector delegate;
 
+    /**
+     * Costruttore di default, inizializza una lista vuota.
+     */
     public ListAdapter() {
         delegate = new Vector();
     }
 
+    /**
+     * Costruttore che inizializza una lista con capacità iniziale specificata.
+     * @param capacity capacità iniziale
+     */
     public ListAdapter(int capacity) {
         delegate = new Vector(capacity);
     }
 
+    /**
+     * Iterator compatibile con HListIterator.
+     */
     private class ListIteratorAdapter implements HListIterator {
         int cursor;
         int lastRet = -1;
@@ -73,29 +83,48 @@ public class ListAdapter implements HList, HCollection {
         }
     }
 
-    // HCollection
+    //  HCollection  \\
 
+    /**
+     * Restituisce il numero di elementi nella lista.
+     * @return numero di elementi
+     */
     @Override
     public int size() {
         return delegate.size();
     }
 
+    /**
+     * Verifica se la lista è vuota.
+     * @return {@code true} se la lista è vuota, {@code false} altrimenti
+     */
     @Override
     public boolean isEmpty() {
         return delegate.size() == 0;
     }
 
+    /**
+     * Verifica se un elemento è presente nella lista.
+     * @param o oggetto da cercare
+     * @return {@code true} se presente
+     */
     @Override
     public boolean contains(Object o) {
         return delegate.contains(o);
     }
     
-    //provvisorio
+    /**
+     * Restituisce un iteratore per la lista.
+     * @return HIterator
+     */
     @Override
     public HIterator iterator() {
         return new IteratorAdapter();
     }
 
+    /**
+     * Iteratore base (compatibile con Java 1.4).
+     */
     private class IteratorAdapter implements HIterator {
         int cursor = 0;
         int lastRet = -1;
@@ -122,6 +151,10 @@ public class ListAdapter implements HList, HCollection {
         }
     }
 
+    /**
+     * Restituisce un array contenente tutti gli elementi della lista.
+     * @return array di oggetti
+     */
     @Override
     public Object[] toArray() {
         Object[] arr = new Object[delegate.size()];
@@ -131,11 +164,16 @@ public class ListAdapter implements HList, HCollection {
         return arr;
     }
 
+    /**
+     * Restituisce un array contenente tutti gli elementi in ordine.
+     * Usa l'array passato se abbastanza grande, altrimenti ne crea uno nuovo.
+     * @param a array di partenza
+     * @return array riempito
+     */
     @Override
     public Object[] toArray(Object[] a) {
         int size = delegate.size();
         if (a.length < size) {
-            // crea un nuovo array dello stesso tipo con la dimensione giusta
             a = (Object[]) java.lang.reflect.Array.newInstance(
                 a.getClass().getComponentType(), size
             );
@@ -144,23 +182,37 @@ public class ListAdapter implements HList, HCollection {
             a[i] = delegate.elementAt(i);
         }
         if (a.length > size) {
-            a[size] = null; // terminatore
+            a[size] = null;
         }
         return a;
     }
 
+    /**
+     * Aggiunge un elemento in coda alla lista.
+     * @param o elemento da aggiungere
+     * @return {@code true}
+     */
     @Override
     public boolean add(Object o) {
         delegate.addElement(o);  // Vector.addElement()
         return true;
     }
 
-
+    /**
+     * Rimuove l'oggetto specificato, il primo che incontra.
+     * @param o oggetto da rimuovere
+     * @return {@code true} se rimosso
+     */
     @Override
     public boolean remove(Object o) {
-        return delegate.removeElement(o); // rimuove solo la prima occorrenza
+        return delegate.removeElement(o);
     }
 
+    /**
+     * Verifica se tutti gli elementi sono presenti nella lista.
+     * @param c collezione da confrontare
+     * @return {@code true} se tutti gli elementi sono contenuti
+     */
     @Override
     public boolean containsAll(HCollection c) {
         HIterator it = c.iterator();
@@ -172,6 +224,11 @@ public class ListAdapter implements HList, HCollection {
         return true;
     }
 
+    /**
+     * Aggiunge tutti gli elementi alla fine della lista.
+     * @param c collezione da aggiungere
+     * @return {@code true} se almeno un elemento è stato aggiunto
+     */
     @Override
     public boolean addAll(HCollection c) {
         boolean modified = false;
@@ -183,6 +240,11 @@ public class ListAdapter implements HList, HCollection {
         return modified;
     }
 
+    /**
+     * Rimuove tutti gli elementi presenti nella collezione.
+     * @param c collezione da rimuovere
+     * @return {@code true} se almeno un elemento è stato rimosso
+     */
     @Override
     public boolean removeAll(HCollection c) {
         boolean modified = false;
@@ -197,6 +259,11 @@ public class ListAdapter implements HList, HCollection {
         return modified;
     }
 
+    /**
+     * Mantiene solo gli elementi presenti nella collezione.
+     * @param c collezione da mantenere
+     * @return {@code true} se la lista è stata modificata
+     */
     @Override
     public boolean retainAll(HCollection c) {
         boolean modified = false;
@@ -213,6 +280,9 @@ public class ListAdapter implements HList, HCollection {
         return modified;
     }
 
+    /**
+     * Rimuove tutti gli elementi dalla lista.
+     */
     @Override
     public void clear() {
         delegate.removeAllElements();
@@ -246,7 +316,14 @@ public class ListAdapter implements HList, HCollection {
         return hash;
     }
 
-    // HList
+    //  HList  \\
+
+    /**
+     * Restituisce l'elemento alla posizione indicata.
+     * @param index indice
+     * @return elemento
+     * @throws IndexOutOfBoundsException se indice non valido
+     */
     @Override
     public Object get(int index) {
         if (index < 0 || index >= delegate.size()) {
@@ -256,6 +333,13 @@ public class ListAdapter implements HList, HCollection {
         return delegate.elementAt(index);
     }
 
+    /**
+     * Sostituisce l'elemento alla posizione indicata.
+     * @param index posizione
+     * @param element nuovo valore
+     * @return valore precedente
+     * @throws IndexOutOfBoundsException se indice non valido
+     */
     @Override
     public Object set(int index, Object element) {
         if (index < 0 || index >= delegate.size()) {
@@ -266,6 +350,12 @@ public class ListAdapter implements HList, HCollection {
         return old;
     }
 
+    /**
+     * Aggiunge un elemento nella posizione specificata.
+     * @param index posizione
+     * @param element elemento da inserire
+     * @throws IndexOutOfBoundsException se l'indice è fuori dal range
+     */
     @Override
     public void add(int index, Object element) {
         if (index < 0 || index > delegate.size()) {
@@ -274,6 +364,12 @@ public class ListAdapter implements HList, HCollection {
         delegate.insertElementAt(element, index);
     }
 
+    /**
+     * Rimuove l'elemento nella posizione specificata.
+     * @param index posizione dell'elemento
+     * @return elemento rimosso
+     * @throws IndexOutOfBoundsException se indice non valido
+     */
     @Override
     public Object remove(int index) {
         if (index < 0 || index >= delegate.size()) {
@@ -284,6 +380,11 @@ public class ListAdapter implements HList, HCollection {
         return old;
     }
 
+    /**
+     * Restituisce l'indice dell'oggetto specificato.
+     * @param o oggetto da cercare
+     * @return indice o -1 se non presente
+     */
     @Override
     public int indexOf(Object o) {
         for (int i = 0; i < delegate.size(); i++) {
@@ -295,6 +396,11 @@ public class ListAdapter implements HList, HCollection {
         return -1;
     }
 
+    /**
+     * Restituisce l'ultimo indice dell'oggetto specificato.
+     * @param o oggetto da cercare
+     * @return indice o -1 se non presente
+     */
     @Override
     public int lastIndexOf(Object o) {
         for (int i = delegate.size() - 1; i >= 0; i--) {
@@ -306,11 +412,21 @@ public class ListAdapter implements HList, HCollection {
         return -1;
     }
 
+    /**
+     * Restituisce un list iterator dalla posizione 0.
+     * @return HListIterator
+     */
     @Override
     public HListIterator listIterator() {
         return new ListIteratorAdapter(0);
     }
 
+    /**
+     * Restituisce un list iterator da un indice specificato.
+     * @param index posizione iniziale
+     * @return HListIterator
+     * @throws IndexOutOfBoundsException se indice non valido
+     */
     @Override
     public HListIterator listIterator(int index) {
         if (index < 0 || index > size()) {
@@ -319,11 +435,25 @@ public class ListAdapter implements HList, HCollection {
         return new ListIteratorAdapter(index);
     }
 
+    /**
+     * Restituisce una sublist vista live da {@code fromIndex} a {@code toIndex - 1}.
+     * @param fromIndex inizio (inclusivo)
+     * @param toIndex fine (esclusivo)
+     * @return sottolista
+     * @throws IndexOutOfBoundsException se limiti invalidi
+     */
     @Override
     public HList subList(int fromIndex, int toIndex) {
         return new SubListAdapter(this, fromIndex, toIndex);
     }
 
+    /**
+     * Aggiunge tutti gli elementi nella posizione specificata.
+     * @param index posizione d'inserimento
+     * @param c collezione da inserire
+     * @return {@code true} se almeno un elemento è stato aggiunto
+     * @throws IndexOutOfBoundsException se l'indice non è valido
+     */
     @Override
     public boolean addAll(int index, HCollection c) {
         if (index < 0 || index > size()) {
@@ -341,4 +471,3 @@ public class ListAdapter implements HList, HCollection {
     }
 
 }
-
