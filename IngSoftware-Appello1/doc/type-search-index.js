@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"myAdapter","l":"HCollection"},{"p":"myAdapter","l":"HIterator"},{"p":"myAdapter","l":"HList"},{"p":"myAdapter","l":"HListIterator"},{"p":"myAdapter","l":"ListAdapter"},{"p":"myAdapter","l":"SubListAdapter"}];updateSearchResults();

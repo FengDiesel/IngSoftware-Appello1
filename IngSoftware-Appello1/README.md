@@ -1,1 +1,0 @@
-# IngSoftware-Appello1
