@@ -1,7 +1,7 @@
 package myAdapter;
 
 /**
- * Interfaccia che estende {@code HCollection} e rappresenta una lista ordinata.
+ * Interfaccia che estende {@code HCollection} e rappresenta una lista.
  * Simula {@code java.util.List}
  */
 
@@ -10,21 +10,21 @@ public interface HList {
     /**
      * Inserisce un elemento alla posizione indicata.
      * @param index posizione
-     * @param element elemento da inserire
+     * @param o elemento da inserire
      * @throws IndexOutOfBoundsException se indice non valido
      */
-    void add(int index, Object element);
+    void add(int index, Object o);
 
     /**
      * Aggiunge un elemento alla fine dlla lista.
-     * @param o elemento da aggiungere
-     * @return {@code true} se la lista è stata modificata
+     * @param o elemento da inserire
+     * @return {@code true} se la lista e' stata modificata
      */
     boolean add(Object o);
 
     /**
      * Aggiunge tutti gli elementi della collezione alla fine della lista.
-     * @param c collezione da aggiungere
+     * @param c collezione da inserire
      * @return {@code true} se la lista è stata modificata
      */
     boolean addAll(HCollection c);
@@ -45,20 +45,20 @@ public interface HList {
 
     /**
      * Verifica se la lista contiene l'oggetto specificato.
-     * @param o oggetto da cercare
+     * @param o oggetto da trovare
      * @return {@code true} se presente
      */
     boolean contains(Object o);
 
     /**
-     * Verifica se tutti gli elementi della collezione sono contenuti.
+     * Verifica se tutti gli elementi della collezione sono presenti.
      * @param c collezione da confrontare
      * @return {@code true} se tutti gli elementi sono presenti
      */
     boolean containsAll(HCollection c);
 
     /**
-     * Verifica se questa lista è uguale a un altro oggetto.
+     * Verifica se questa lista è uguale a un oggetto.
      * @param o oggetto da confrontare
      * @return {@code true} se uguali per contenuto e ordine
      */
@@ -73,13 +73,13 @@ public interface HList {
     Object get(int index);
 
     /**
-     * Restituisce l'hash code calcolato in base al contenuto.
-     * @return valore hash della lista
+     * Restituisce l'hash code della lista.
+     * @return hash della lista
      */
     int hashCode();
 
     /**
-     * Restituisce la prima occorrenza dell'elemento.
+     * Restituisce, se presente, l'elemento @param o.
      * @param o elemento da cercare
      * @return indice oppure -1 se non presente
      */
@@ -92,26 +92,26 @@ public interface HList {
     boolean isEmpty();
 
     /**
-     * Restituisce un iteratore sugli elementi della lista.
+     * Restituisce un iteratore sulla lista.
      * @return {@code HIterator}
      */
     HIterator iterator();
 
     /**
-     * Restituisce l'ultima occorrenza dell'elemento.
+     * Restituisce l'ultima occorrenza dell'elemento @param o.
      * @param o elemento da cercare
      * @return indice oppure -1 se non presente
      */
     int lastIndexOf(Object o);
 
     /**
-     * Restituisce un list iterator a partire da inizio lista.
+     * Restituisce un list iterator della lista.
      * @return un {@code HListIterator}
      */
     HListIterator listIterator();
 
     /**
-     * Restituisce un list iterator a partire da indice specifico
+     * Restituisce un list iterator a partire da indice @param index
      * @param index posizione iniziale
      * @return un {@code HListIterator}
      * @throws IndexOutOfBoundsException se indice non valido
@@ -119,7 +119,7 @@ public interface HList {
     HListIterator listIterator(int index);
 
     /**
-     * Rimuove l' elemento alla posizione indicata.
+     * Rimuove l' elemento alla posizione inserita.
      * @param index posizione
      * @return elemento rimosso
      * @throws IndexOutOfBoundsException se l'indice non valido
@@ -127,14 +127,14 @@ public interface HList {
     Object 	remove(int index);
 
     /**
-     * Rimuove la prima occorrenza dell'oggetto specificato.
+     * Rimuove, se presente, l'oggetto specificato.
      * @param o oggetto da rimuovere
-     * @return {@code true} se rimosso
+     * @return {@code true} se rimosso, {@code false} altrimenti
      */
     boolean remove(Object o);
 
     /**
-     * Rimuove tutti gli elementi contenuti nella collezione.
+     * Rimuove tutti gli elementi presenti nella collezione.
      * @param c collezione da rimuovere
      * @return {@code true} se almeno un elemento è stato rimosso
      */
@@ -163,7 +163,7 @@ public interface HList {
     int size();
 
     /**
-     * Retituisce una vista live di una porzione della lista.
+     * Retituisce una vista di una porzione della lista.
      * @param fromIndex indice iniziale (incluso)
      * @param toIndex indice finale (escluso)
      * @return sottolista
