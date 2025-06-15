@@ -1,4 +1,4 @@
-package test.myTest;
+package myTest;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -10,9 +10,9 @@ import myAdapter.HList;
 import myAdapter.HListIterator;
 import myAdapter.ListAdapter;
 
+//  Homework - Test Case Documentation
+
 /**
- * Homework - Test Case Documentation
- *
  * Summary:
  * Questo test case verifica il comportamento della classe {@code ListAdapter},
  * un'implementazione di {@code HList}, con particolare attenzione alla correttezza
@@ -142,7 +142,7 @@ public class ListAdapterTest {
      *   5. list.get(1)
      *
      * Expected Results:
-     *   - add("A") e add("B") --> true
+     *   - add("A") e add("B") da true
      *   - list.size() == 2
      *   - list.get(0).equals("A")
      *   - list.get(1).equals("B")
@@ -167,7 +167,7 @@ public class ListAdapterTest {
      *   Comportamento di HList.get(int) per indice fuori range inferiore.
      *
      * Formal Review:
-     *   Specifica J2SE 1.4.2: get(i) deve lanciare IndexOutOfBoundsException se i < 0.
+     *   Specifica J2SE 1.4.2: get(i) deve lanciare IndexOutOfBoundsException se i &lt; 0.
      *
      * Pre-Condition:
      *   list è vuoto.
@@ -188,13 +188,13 @@ public class ListAdapterTest {
 
     /**
      * Summary:
-     *   Verifica che get(i) lanci IndexOutOfBoundsException se i >= size.
+     *   Verifica che get(i) lanci IndexOutOfBoundsException se i &ge; size.
      *
      * Test Method Scope:
      *   Comportamento di HList.get(int) con indice troppo grande.
      *
      * Formal Review:
-     *   Spec J2SE 1.4.2: get(i) deve lanciare IndexOutOfBoundsException per i >= size().
+     *   Spec J2SE 1.4.2: get(i) deve lanciare IndexOutOfBoundsException per i &ge; size().
      *
      * Pre-Condition:
      *   list contiene un solo elemento.
@@ -212,7 +212,7 @@ public class ListAdapterTest {
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetIndexOutOfBounds() {
         list.add("X");
-        list.get(1); // index >= size
+        list.get(1);
     }
 
     /**
@@ -256,13 +256,13 @@ public class ListAdapterTest {
 
     /**
      * Summary:
-     *   Verifica che add(index, E) lanci IndexOutOfBoundsException per index < 0.
+     *   Verifica che add(index, E) lanci IndexOutOfBoundsException per index &lt; 0.
      *
      * Test Method Scope:
      *   Metodo HList.add(int, E) con indice negativo.
      *
      * Formal Review:
-     *   Spec J2SE 1.4.2: add(i, e) deve lanciare IndexOutOfBoundsException se i < 0.
+     *   Spec J2SE 1.4.2: add(i, e) deve lanciare IndexOutOfBoundsException se i &lt; 0.
      *
      * Pre-Condition:
      *   list è vuoto.
@@ -283,13 +283,13 @@ public class ListAdapterTest {
 
     /**
      * Summary:
-     *   Verifica che add(index, E) lanci IndexOutOfBoundsException per index > size.
+     *   Verifica che add(index, E) lanci IndexOutOfBoundsException per index &gt; size.
      *
      * Test Method Scope:
      *   Metodo HList.add(int, E) con indice fuori range superiore.
      *
      * Formal Review:
-     *   Spec J2SE 1.4.2: add(i, e) deve lanciare IndexOutOfBoundsException se i > size().
+     *   Spec J2SE 1.4.2: add(i, e) deve lanciare IndexOutOfBoundsException se i &gt; size().
      *
      * Pre-Condition:
      *   list contiene un elemento.
@@ -354,13 +354,13 @@ public class ListAdapterTest {
 
     /**
      * Summary:
-     *   Verifica che remove(index) lanci IndexOutOfBoundsException per index >= size.
+     *   Verifica che remove(index) lanci IndexOutOfBoundsException per index &ge; size.
      *
      * Test Method Scope:
      *   Metodo HList.remove(int) con indice fuori range.
      *
      * Formal Review:
-     *   Spec J2SE 1.4.2: remove(i) deve lanciare IndexOutOfBoundsException se i < 0 o ≥ size().
+     *   Spec J2SE 1.4.2: remove(i) deve lanciare IndexOutOfBoundsException se i &lt; 0 o &ge; size().
      *
      * Pre-Condition:
      *   list contiene un elemento.
@@ -705,8 +705,8 @@ public class ListAdapterTest {
      *
      * Formal Review:
      *   Spec J2SE 1.4.2: 
-     *     - se array.length>=size: riempie e mettew null in posizione size;
-     *     - se array.length<size: ne crea uno nuovo di tipo T[].
+     *     - se array.length &ge; size: riempie e mettew null in posizione size;
+     *     - se array.length &lt; size: ne crea uno nuovo di tipo T[].
      *
      * Pre-Condition:
      *   list = ["X","Y"].
@@ -1118,7 +1118,7 @@ public class ListAdapterTest {
      *   HList.addAll(int, HCollection) con indice invalido.
      *
      * Formal Review:
-     *   Spec J2SE 1.4.2: addAll(i,c) deve lanciare IndexOutOfBoundsException se i < 0 o > size.
+     *   Spec J2SE 1.4.2: addAll(i,c) deve lanciare IndexOutOfBoundsException se i &lt; 0 o &gt; size.
      *
      * Pre-Condition:
      *   list vuota, c = ["X"].

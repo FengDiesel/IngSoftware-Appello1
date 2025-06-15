@@ -56,7 +56,7 @@ import static org.junit.Assert.*;
  * Attachments:
  *   - SubListAdapter.java
  *   - ListAdapter.java
- *   - junit-<versione>.jar
+ *   - junit-4.13.2.jar
  */
 public class SubListAdapterTest {
 
@@ -223,7 +223,7 @@ public class SubListAdapterTest {
      *   Metodo HList.get(int) di SubListAdapter con indice invalido.
      *
      * Formal Review:
-     *   Spec J2SE 1.4.2: get(i) deve lanciare IndexOutOfBoundsException per i<0 o i>=size().
+     *   Spec J2SE 1.4.2: get(i) deve lanciare IndexOutOfBoundsException per i &lt;;; 0 o i &ge; size().
      *
      * Pre-Condition:
      *   sub = new SubListAdapter(parent, 1, 3).
@@ -251,7 +251,7 @@ public class SubListAdapterTest {
      *   Costruttore SubListAdapter(int from, int to).
      *
      * Formal Review:
-     *   Spec J2SE 1.4.2: subList(from,to) lancia IndexOutOfBoundsException se from<0, to>size o from>to.
+     *   Spec J2SE 1.4.2: subList(from,to) lancia IndexOutOfBoundsException se from<0, to &gt; size o from &gt; to.
      *
      * Pre-Condition:
      *   parent ha 5 elementi.
