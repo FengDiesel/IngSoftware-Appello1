@@ -34,23 +34,23 @@ public class TestRunner {
     /**
      * Main per l'esecuzione dei test JUnit.
      *
-     * @s.ummary Avvia l'esecuzione delle classi di test specificate e stampa i risultati in output standard.
+     * @summary.test Avvia l'esecuzione delle classi di test specificate e stampa i risultati in output standard.
      *
-     * @d.esign Utilizza {@link JUnitCore#runClasses(Class...)} per eseguire {@code ListAdapterTest} e {@code SubListAdapterTest}.
+     * @design.test Utilizza {@link JUnitCore#runClasses(Class...)} per eseguire {@code ListAdapterTest} e {@code SubListAdapterTest}.
      *          Verifica la presenza di errori e, in caso di fallimenti, stampa dettagli ed eccezioni.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>Avvia {@code JUnitCore.runClasses(...)} sulle classi di test</li>
      *   <li>Stampa numero totale e fallimenti</li>
      *   <li>Se presenti, stampa ogni fallimento e il relativo stack trace</li>
      * </ul>
      *
-     * @p.recond Le classi di test devono essere compilate correttamente e le dipendenze JUnit devono essere disponibili.
+     * @precondition.test Le classi di test devono essere compilate correttamente e le dipendenze JUnit devono essere disponibili.
      *
-     * @p.ostcond Stampa in console dei risultati del test.
+     * @postcondition.test Stampa in console dei risultati del test.
      *
-     * @r.esult I test vengono eseguiti e i risultati presentati in formato leggibile.
+     * @result.test I test vengono eseguiti e i risultati presentati in formato leggibile.
      *
      * @param args argomenti da linea di comando (non utilizzati)
      */

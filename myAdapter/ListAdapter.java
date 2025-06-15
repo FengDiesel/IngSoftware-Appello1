@@ -3,12 +3,14 @@ package myAdapter;
 import java.util.Vector;
 
 /**
- * Adapter della classe {@link Vector} che implementa {@link HList} e {@link HCollection}.
- * Compatibile con le specifiche Java 1.4.2 e CLDC 1.1.
+ * Adapter della classe {@link Vector} che implementa le interfacce {@link HList} e {@link HCollection}.
+ * <p>
+ * Fornisce una lista compatibile con le specifiche Java 1.4.2 e CLDC 1.1.
  */
 
 public class ListAdapter implements HList, HCollection {
 
+    /** Lista sottostante che contiene gli elementi. */
     private Vector delegate;
 
     /**
@@ -27,10 +29,14 @@ public class ListAdapter implements HList, HCollection {
     }
 
     /**
-     * Iterator compatibile con HListIterator.
+     * Implementazione dell'interfaccia {@link HListIterator} per {@link ListAdapter}.
+     * <p>
+     * Supporta l'iterazione bidirezionale e le operazioni di modifica durante l'iterazione.
      */
     private class ListIteratorAdapter implements HListIterator {
+        /** Posizione corrente del cursore. */
         int cursor;
+        /** Ultima posizione restituita da next o previous. */
         int lastRet = -1;
 
         public ListIteratorAdapter(int index) {
@@ -124,10 +130,17 @@ public class ListAdapter implements HList, HCollection {
     }
 
     /**
-     * Iteratore base (compatibile con Java 1.4).
+     * Implementazione di {@code HIterator} che consente l'iterazione elementare su {@code ListAdapter}.
      */
     private class IteratorAdapter implements HIterator {
+        /**
+         * Posizione corrente del cursore nell'iterazione.
+         */
         int cursor = 0;
+
+        /**
+         * Indice dell'ultimo elemento restituito; -1 se nessuno.
+         */
         int lastRet = -1;
 
         public boolean hasNext() {
@@ -288,6 +301,12 @@ public class ListAdapter implements HList, HCollection {
         delegate.removeAllElements();
     }
 
+    /**
+     * Confronta questa lista con un altro oggetto per uguaglianza di contenuto e ordine.
+     *
+     * @param o oggetto da confrontare
+     * @return {@code true} se le liste sono uguali
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) return true;
@@ -303,6 +322,10 @@ public class ListAdapter implements HList, HCollection {
         return true;
     }
 
+    /**
+     * Calcola il valore di hash per la lista.
+     * @return valore hash calcolato sugli elementi
+     */
     @Override
     public int hashCode() {
         int hash = 1;
@@ -435,11 +458,13 @@ public class ListAdapter implements HList, HCollection {
     }
 
     /**
-     * Restituisce una sublist vista live da {@code fromIndex} a {@code toIndex - 1}.
-     * @param fromIndex inizio (inclusivo)
-     * @param toIndex fine (esclusivo)
-     * @return sottolista
-     * @throws IndexOutOfBoundsException se limiti invalidi
+     * Restituisce una vista dinamica (live) di una porzione della lista compresa tra {@code fromIndex} (incluso)
+     * e {@code toIndex} (escluso).
+     *
+     * @param fromIndex indice iniziale (incluso)
+     * @param toIndex indice finale (escluso)
+     * @return sottolista contenente gli elementi nell'intervallo specificato
+     * @throws IndexOutOfBoundsException se {@code fromIndex} o {@code toIndex} sono fuori dai limiti
      */
     @Override
     public HList subList(int fromIndex, int toIndex) {

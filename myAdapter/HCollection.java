@@ -2,7 +2,8 @@ package myAdapter;
 
 /**
  * Interfaccia che rappresenta una collezione generica di oggetti.
- * Simula {@code java.util.Collection} come da specifica J2SE 1.4.2.
+ * <p>
+ * Simula {@link java.util.Collection} come da specifica J2SE 1.4.2.
  */
 
 public interface HCollection {
@@ -94,7 +95,10 @@ public interface HCollection {
 
     /**
      * Restituisce un array contenente tutti gli elementi della collezione.
-     * @return array degli elementi
+     * Se l'array {@code a} ha una dimensione sufficiente, viene riempito con gli elementi e restituito.
+     * In caso contrario, viene creato un nuovo array dello stesso tipo e dimensione adeguata.
+     *
+     * @return un array contenente gli elementi della collezione
      */
     Object[] toArray();
 

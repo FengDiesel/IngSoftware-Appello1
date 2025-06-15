@@ -1,8 +1,9 @@
 package myAdapter;
 
 /**
- * Interfaccia per l'iterazione su una collezione compatibile con Java 1.4.
- * Simula {@code java.util.Iterator}
+ * Interfaccia per l'iterazione su una collezione compatibile con J2SE 1.4.2.
+ * <p>
+ * Simula il comportamento di {@link java.util.Iterator}, adattato al progetto {@code myAdapter}.
  */
 
 public interface HIterator {
@@ -15,15 +16,17 @@ public interface HIterator {
 
 
     /**
-     * Restituisce l'elemento successivo.
-     * @return elemento successivo
-     * @throws java.util.NoSuchElementException se non ci sono altri elementi
+     * Restituisce l'elemento successivo della collezione.
+     *
+     * @return l'elemento successivo nell'iterazione
+     * @throws java.util.NoSuchElementException se non ci sono altri elementi da iterare
      */
     Object next();
 
     /**
-     * Rimuove l'ultimo elemento restituito da {@code next()}.
-     * @throws IllegalStateException se {@code next()} non è ancora stato chiamato
+     * Rimuove dalla collezione l'ultimo elemento restituito da {@code next()}.
+     *
+     * @throws IllegalStateException se {@code next()} non è ancora stato chiamato o se {@code remove()} è già stato chiamato dopo l'ultima chiamata a {@code next()}
      */
     void remove();
 }

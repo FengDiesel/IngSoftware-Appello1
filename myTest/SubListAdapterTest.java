@@ -9,7 +9,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Test suite per la classe {@link myAdapter.SubListAdapter}, che fornisce una vista parziale di una lista padre implementata da {@link myAdapter.ListAdapter}.
+ * Classe di test per {@code SubListAdapter}.
+ * Verifica il comportamento della sottolista vista sulla lista principale.
  * <p>
  * <strong>Summary:</strong> Verifica che {@code SubListAdapter} mantenga correttamente il legame con la lista padre, propagando aggiornamenti e operazioni coerentemente.
  * Include test su metodi fondamentali come {@code get()}, {@code add()}, {@code remove()} e sulla validazione dei range.
@@ -54,9 +55,19 @@ import static org.junit.Assert.*;
  */
 public class SubListAdapterTest {
 
+    /**
+     * Lista principale da cui viene derivata la sublist.
+     */
     private ListAdapter parent;
+
+    /**
+     * Sottolista derivata dalla lista principale da testare.
+     */
     private SubListAdapter sub;
 
+    /**
+     * Inizializza una lista e una sublist di esempio prima di ogni test.
+     */
     @Before
     public void setUp() {
         parent = new ListAdapter();
@@ -70,21 +81,21 @@ public class SubListAdapterTest {
     /**
      * Test dei metodi {@link myAdapter.HList#size()} e {@link myAdapter.HList#isEmpty()} su una sublist.
      *
-     * @s.ummary Verifica che la sublist calcoli correttamente la dimensione e rilevi se è vuota o meno.
+     * @summary.test Verifica che la sublist calcoli correttamente la dimensione e rilevi se è vuota o meno.
      *
-     * @d.esign Crea due sublist: una non vuota e una vuota. Verifica i valori restituiti da {@code size()} e {@code isEmpty()}.
+     * @design.test Crea due sublist: una non vuota e una vuota. Verifica i valori restituiti da {@code size()} e {@code isEmpty()}.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code sub = new SubListAdapter(parent, 1, 4)} → contiene ["B", "C", "D"]</li>
      *   <li>{@code subEmpty = new SubListAdapter(parent, 2, 2)} → vuota</li>
      * </ul>
      *
-     * @p.recond Lista padre contiene ["A", "B", "C", "D", "E"].
+     * @precondition.test Lista padre contiene ["A", "B", "C", "D", "E"].
      *
-     * @p.ostcond Nessuna modifica a parent o sublist.
+     * @postcondition.test Nessuna modifica a parent o sublist.
      *
-     * @r.esult La dimensione delle due sublist è corretta; {@code isEmpty()} ritorna il valore atteso.
+     * @result.test La dimensione delle due sublist è corretta; {@code isEmpty()} ritorna il valore atteso.
      */
     @Test
     public void testSizeAndIsEmpty() {
@@ -92,29 +103,33 @@ public class SubListAdapterTest {
         assertEquals(3, sub.size());
         assertFalse(sub.isEmpty());
 
-        SubListAdapter subEmpty = new SubListAdapter(parent, 2, 2);
+        ListAdapter parent = new ListAdapter();
+        parent.add("a");
+        parent.add("b");
+        SubListAdapter subEmpty = new SubListAdapter(parent, 2, 2); // sub vuota
         assertEquals(0, subEmpty.size());
         assertTrue(subEmpty.isEmpty());
     }
 
+
     /**
      * Test del metodo {@link myAdapter.HList#get(int)} sulla sublist.
      *
-     * @s.ummary Verifica che {@code get(i)} mappi correttamente l’indice relativo al parent.
+     * @summary.test Verifica che {@code get(i)} mappi correttamente l’indice relativo al parent.
      *
-     * @d.esign Crea una sublist tra indici 1 e 4 e accede agli elementi della vista.
+     * @design.test Crea una sublist tra indici 1 e 4 e accede agli elementi della vista.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code sub.get(0)} → "B"</li>
      *   <li>{@code sub.get(2)} → "D"</li>
      * </ul>
      *
-     * @p.recond Lista padre = ["A", "B", "C", "D", "E"].
+     * @precondition.test Lista padre = ["A", "B", "C", "D", "E"].
      *
-     * @p.ostcond Lista padre invariata.
+     * @postcondition.test Lista padre invariata.
      *
-     * @r.esult Gli elementi acceduti dalla sublist corrispondono a quelli della lista padre.
+     * @result.test Gli elementi acceduti dalla sublist corrispondono a quelli della lista padre.
      */
     @Test
     public void testGetFromSubList() {
@@ -126,21 +141,21 @@ public class SubListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#add(int, Object)} sulla sublist.
      *
-     * @s.ummary Verifica che {@code add()} nella sublist modifichi anche la lista padre e aggiorni la dimensione.
+     * @summary.test Verifica che {@code add()} nella sublist modifichi anche la lista padre e aggiorni la dimensione.
      *
-     * @d.esign Crea sublist [1,4] → ["B","C","D"], inserisce "X" in mezzo.
+     * @design.test Crea sublist [1,4] → ["B","C","D"], inserisce "X" in mezzo.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code sub.add(1, "X")} → sub = ["B","X","C","D"]</li>
      *   <li>{@code parent.get(2)} == "X"</li>
      * </ul>
      *
-     * @p.recond Lista padre contiene 5 elementi.
+     * @precondition.test Lista padre contiene 5 elementi.
      *
-     * @p.ostcond Lista padre contiene 6 elementi; sublist aggiornata coerentemente.
+     * @postcondition.test Lista padre contiene 6 elementi; sublist aggiornata coerentemente.
      *
-     * @r.esult Elemento correttamente inserito in entrambe le strutture.
+     * @result.test Elemento correttamente inserito in entrambe le strutture.
      */
     @Test
     public void testAddToSubList() {
@@ -155,22 +170,22 @@ public class SubListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#remove(int)} sulla sublist.
      *
-     * @s.ummary Verifica che {@code remove(i)} rimuova correttamente da sublist e riflessivamente da parent.
+     * @summary.test Verifica che {@code remove(i)} rimuova correttamente da sublist e riflessivamente da parent.
      *
-     * @d.esign Rimuove elemento all’indice 1 dalla sublist ["B","C","D"].
+     * @design.test Rimuove elemento all’indice 1 dalla sublist ["B","C","D"].
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code removed = sub.remove(1)} → "C"</li>
      *   <li>Verifica sub = ["B", "D"]</li>
      *   <li>Verifica parent.size() == 4</li>
      * </ul>
      *
-     * @p.recond Lista padre = ["A","B","C","D","E"].
+     * @precondition.test Lista padre = ["A","B","C","D","E"].
      *
-     * @p.ostcond Lista padre aggiornata coerentemente; sublist ridotta.
+     * @postcondition.test Lista padre aggiornata coerentemente; sublist ridotta.
      *
-     * @r.esult Elemento rimosso correttamente da entrambi.
+     * @result.test Elemento rimosso correttamente da entrambi.
      */
     @Test
     public void testRemoveFromSubList() {
@@ -185,20 +200,20 @@ public class SubListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#get(int)} su una sublist con indice fuori range.
      *
-     * @s.ummary Verifica che {@code get(i)} lanci {@link IndexOutOfBoundsException} per indice non valido.
+     * @summary.test Verifica che {@code get(i)} lanci {@link IndexOutOfBoundsException} per indice non valido.
      *
-     * @d.esign Crea sublist tra [1,3] e tenta {@code get(5)}.
+     * @design.test Crea sublist tra [1,3] e tenta {@code get(5)}.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>Chiamata {@code get(5)} su sublist lunga 2 → eccezione</li>
      * </ul>
      *
-     * @p.recond Lista padre contiene ["A", "B", "C", "D", "E"].
+     * @precondition.test Lista padre contiene ["A", "B", "C", "D", "E"].
      *
-     * @p.ostcond Nessuna modifica a parent o sublist.
+     * @postcondition.test Nessuna modifica a parent o sublist.
      *
-     * @r.esult Deve essere lanciata {@code IndexOutOfBoundsException}.
+     * @result.test Deve essere lanciata {@code IndexOutOfBoundsException}.
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testInvalidIndexInGet() {
@@ -210,21 +225,21 @@ public class SubListAdapterTest {
      * Test del costruttore {@link myAdapter.SubListAdapter#SubListAdapter(ListAdapter, int, int)}
  con range invalido.
      *
-     * @s.ummary Verifica che il costruttore lanci {@link IndexOutOfBoundsException} per valori di from/to invalidi.
+     * @summary.test Verifica che il costruttore lanci {@link IndexOutOfBoundsException} per valori di from/to invalidi.
      *
-     * @d.esign Crea sublist con {@code from = -1, to = 3}.
+     * @design.test Crea sublist con {@code from = -1, to = 3}.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>from &lt; 0 → deve lanciare eccezione</li>
      *   <li>Altri casi di errore (es. from > to o to > size) sono simili</li>
      * </ul>
      *
-     * @p.recond Lista padre contiene 5 elementi.
+     * @precondition.test Lista padre contiene 5 elementi.
      *
-     * @p.ostcond Lista padre invariata.
+     * @postcondition.test Lista padre invariata.
      *
-     * @r.esult Deve essere lanciata {@code IndexOutOfBoundsException}.
+     * @result.test Deve essere lanciata {@code IndexOutOfBoundsException}.
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testConstructorInvalidRange() {

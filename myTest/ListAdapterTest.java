@@ -11,7 +11,8 @@ import myAdapter.HListIterator;
 import myAdapter.ListAdapter;
 
 /**
- * Test suite per la classe {@link myAdapter.ListAdapter} che implementa {@link myAdapter.HList}.
+ * Classe di test per {@code ListAdapter}.
+ * Contiene test unitari per verificarne il comportamento rispetto all'interfaccia {@code HList}.
  * <p>
  * <strong>Summary:</strong> Questa suite di test verifica il comportamento della classe {@code ListAdapter}, assicurando che rispetti le specifiche dell'interfaccia {@code HList} attraverso test su:
  * <ul>
@@ -40,6 +41,9 @@ import myAdapter.ListAdapter;
  * <strong>Dipendenze:</strong> {@link ListAdapter}, {@link HList}, {@link HIterator}, {@link HListIterator}, {@link HCollection}, {@code junit-4.13.2.jar}
  */
 public class ListAdapterTest {
+    /**
+     * Lista da testare, viene reinizializzata prima di ogni test.
+     */
     private HList list;
 
     /**
@@ -53,21 +57,21 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#isEmpty()} e {@link myAdapter.HList#size()} su una lista vuota.
      * 
-     * @s.ummary Verifica che una nuova lista sia inizialmente vuota.
+     * @summary.test Verifica che una nuova lista sia inizialmente vuota.
      * 
-     * @d.esign Controlla che {@code isEmpty()} ritorni {@code true} e {@code size()} ritorni 0 per una nuova lista vuota.
+     * @design.test Controlla che {@code isEmpty()} ritorni {@code true} e {@code size()} ritorni 0 per una nuova lista vuota.
      * 
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>Chiamare {@code list.size()}</li>
      *   <li>Chiamare {@code list.isEmpty()}</li>
      * </ul>
      * 
-     * @p.recond La lista è appena inizializzata ed è vuota.
+     * @precondition.test La lista è appena inizializzata ed è vuota.
      * 
-     * @p.ostcond La lista rimane vuota.
+     * @postcondition.test La lista rimane vuota.
      * 
-     * @r.esult {@code size()} deve restituire 0, {@code isEmpty()} deve restituire {@code true}.
+     * @result.test {@code size()} deve restituire 0, {@code isEmpty()} deve restituire {@code true}.
      */
     @Test
     public void testEmptyList() {
@@ -80,21 +84,21 @@ public class ListAdapterTest {
     /**
      * Test dei metodi {@link myAdapter.HList#add(Object)} e {@link myAdapter.HList#get(int)}.
      * 
-     * @s.ummary Verifica che gli elementi vengano aggiunti in coda e letti in ordine corretto tramite {@code get()}.
+     * @summary.test Verifica che gli elementi vengano aggiunti in coda e letti in ordine corretto tramite {@code get()}.
      * 
-     * @d.esign Inserisce due elementi e verifica l'ordine e la dimensione.
+     * @design.test Inserisce due elementi e verifica l'ordine e la dimensione.
      * 
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>Inserire "A" e "B" con {@code add()}</li>
      *   <li>Verificare con {@code get(i)} e {@code size()}</li>
      * </ul>
      * 
-     * @p.recond La lista è vuota.
+     * @precondition.test La lista è vuota.
      * 
-     * @p.ostcond La lista contiene ["A", "B"].
+     * @postcondition.test La lista contiene ["A", "B"].
      * 
-     * @r.esult {@code get(0) == "A"}; {@code get(1) == "B"}; {@code size() == 2}.
+     * @result.test {@code get(0) == "A"}; {@code get(1) == "B"}; {@code size() == 2}.
      */
     @Test
     public void testAddAndGet() {
@@ -108,17 +112,17 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#get(int)} con indice negativo.
      * 
-     * @s.ummary Verifica che venga lanciata {@link IndexOutOfBoundsException} per indice negativo.
+     * @summary.test Verifica che venga lanciata {@link IndexOutOfBoundsException} per indice negativo.
      * 
-     * @d.esign Accede alla lista con indice -1.
+     * @design.test Accede alla lista con indice -1.
      * 
-     * @d.escription Chiama {@code list.get(-1)} e si aspetta un'eccezione.
+     * @description.test Chiama {@code list.get(-1)} e si aspetta un'eccezione.
      * 
-     * @p.recond Lista vuota.
+     * @precondition.test Lista vuota.
      * 
-     * @p.ostcond Lista invariata.
+     * @postcondition.test Lista invariata.
      * 
-     * @r.esult Lancio di {@code IndexOutOfBoundsException}.
+     * @result.test Lancio di {@code IndexOutOfBoundsException}.
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetNegativeIndex() {
@@ -128,21 +132,21 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#get(int)} con indice uguale alla dimensione.
      *
-     * @s.ummary Verifica che {@code get(i)} lanci {@link IndexOutOfBoundsException} se {@code i >= size()}.
+     * @summary.test Verifica che {@code get(i)} lanci {@link IndexOutOfBoundsException} se {@code i >= size()}.
      *
-     * @d.esign Inserisce un elemento, quindi tenta di accedere a {@code get(1)}.
+     * @design.test Inserisce un elemento, quindi tenta di accedere a {@code get(1)}.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>Inserisce "X" con {@code add()}</li>
      *   <li>Chiama {@code get(1)} e verifica il lancio di eccezione</li>
      * </ul>
      *
-     * @p.recond Lista contiene un solo elemento.
+     * @precondition.test Lista contiene un solo elemento.
      *
-     * @p.ostcond Lista rimane invariata.
+     * @postcondition.test Lista rimane invariata.
      *
-     * @r.esult Deve essere lanciata {@code IndexOutOfBoundsException}.
+     * @result.test Deve essere lanciata {@code IndexOutOfBoundsException}.
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetIndexOutOfBounds() {
@@ -153,22 +157,22 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#add(int, Object)}.
      *
-     * @s.ummary Verifica che un elemento venga correttamente inserito a un indice specifico e che gli altri vengano spostati.
+     * @summary.test Verifica che un elemento venga correttamente inserito a un indice specifico e che gli altri vengano spostati.
      *
-     * @d.esign Inserisce "A" e "C", poi "B" in mezzo. Controlla l’ordine risultante.
+     * @design.test Inserisce "A" e "C", poi "B" in mezzo. Controlla l’ordine risultante.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code list.add("A")}</li>
      *   <li>{@code list.add("C")}</li>
      *   <li>{@code list.add(1, "B")}</li>
      * </ul>
      *
-     * @p.recond Lista inizialmente vuota.
+     * @precondition.test Lista inizialmente vuota.
      *
-     * @p.ostcond Lista contiene ["A", "B", "C"].
+     * @postcondition.test Lista contiene ["A", "B", "C"].
      *
-     * @r.esult Gli elementi sono correttamente ordinati.
+     * @result.test Gli elementi sono correttamente ordinati.
      */
     @Test
     public void testAddAtIndex() {
@@ -185,20 +189,20 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#add(int, Object)} con indice negativo.
      *
-     * @s.ummary Verifica che {@code add()} con indice negativo lanci {@link IndexOutOfBoundsException}.
+     * @summary.test Verifica che {@code add()} con indice negativo lanci {@link IndexOutOfBoundsException}.
      *
-     * @d.esign Si tenta {@code add(-1, "X")} su lista vuota.
+     * @design.test Si tenta {@code add(-1, "X")} su lista vuota.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>Chiamata a {@code list.add(-1, "X")}</li>
      * </ul>
      *
-     * @p.recond Lista vuota.
+     * @precondition.test Lista vuota.
      *
-     * @p.ostcond Lista invariata.
+     * @postcondition.test Lista invariata.
      *
-     * @r.esult Deve essere lanciata {@code IndexOutOfBoundsException}.
+     * @result.test Deve essere lanciata {@code IndexOutOfBoundsException}.
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testAddAtNegativeIndex() {
@@ -208,21 +212,21 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#add(int, Object)} con indice maggiore di {@code size()}.
      *
-     * @s.ummary Verifica che venga lanciata {@link IndexOutOfBoundsException} per indice non valido.
+     * @summary.test Verifica che venga lanciata {@link IndexOutOfBoundsException} per indice non valido.
      *
-     * @d.esign Inserisce un elemento, poi tenta {@code add(2, "B")}.
+     * @design.test Inserisce un elemento, poi tenta {@code add(2, "B")}.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code list.add("A")}</li>
      *   <li>{@code list.add(2, "B")}</li>
      * </ul>
      *
-     * @p.recond Lista ha un solo elemento.
+     * @precondition.test Lista ha un solo elemento.
      *
-     * @p.ostcond Lista rimane ["A"].
+     * @postcondition.test Lista rimane ["A"].
      *
-     * @r.esult Deve essere lanciata {@code IndexOutOfBoundsException}.
+     * @result.test Deve essere lanciata {@code IndexOutOfBoundsException}.
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testAddAtTooLargeIndex() {
@@ -233,21 +237,21 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#remove(int)}.
      *
-     * @s.ummary Verifica la rimozione dell’elemento all’indice specificato e la restituzione corretta.
+     * @summary.test Verifica la rimozione dell’elemento all’indice specificato e la restituzione corretta.
      *
-     * @d.esign Inserisce ["A", "B", "C"], rimuove "B" da indice 1 e verifica lista aggiornata.
+     * @design.test Inserisce ["A", "B", "C"], rimuove "B" da indice 1 e verifica lista aggiornata.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code list.remove(1)}</li>
      *   <li>Verifica dimensione e contenuto della lista</li>
      * </ul>
      *
-     * @p.recond Lista contiene ["A", "B", "C"].
+     * @precondition.test Lista contiene ["A", "B", "C"].
      *
-     * @p.ostcond Lista = ["A", "C"].
+     * @postcondition.test Lista = ["A", "C"].
      *
-     * @r.esult {@code remove(1)} restituisce "B" e riduce la size.
+     * @result.test {@code remove(1)} restituisce "B" e riduce la size.
      */
     @Test
     public void testRemoveByIndex() {
@@ -267,21 +271,21 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#remove(int)} con indice fuori range superiore.
      *
-     * @s.ummary Verifica che {@code remove(i)} lanci {@link IndexOutOfBoundsException} se {@code i >= size()}.
+     * @summary.test Verifica che {@code remove(i)} lanci {@link IndexOutOfBoundsException} se {@code i >= size()}.
      *
-     * @d.esign Inserisce "X" e tenta {@code remove(1)}.
+     * @design.test Inserisce "X" e tenta {@code remove(1)}.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>Inserisce "X" con {@code add()}</li>
      *   <li>Chiama {@code remove(1)}</li>
      * </ul>
      *
-     * @p.recond Lista contiene un elemento.
+     * @precondition.test Lista contiene un elemento.
      *
-     * @p.ostcond Lista invariata.
+     * @postcondition.test Lista invariata.
      *
-     * @r.esult Deve essere lanciata {@code IndexOutOfBoundsException}.
+     * @result.test Deve essere lanciata {@code IndexOutOfBoundsException}.
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testRemoveIndexOutOfBounds() {
@@ -292,21 +296,21 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HCollection#remove(Object)}.
      *
-     * @s.ummary Verifica la rimozione di un oggetto esistente e il fallimento su oggetto inesistente.
+     * @summary.test Verifica la rimozione di un oggetto esistente e il fallimento su oggetto inesistente.
      *
-     * @d.esign Inserisce ["A", "B", "C"], rimuove "B", verifica successo. Tenta rimozione di "Z", verifica fallimento.
+     * @design.test Inserisce ["A", "B", "C"], rimuove "B", verifica successo. Tenta rimozione di "Z", verifica fallimento.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code remove("B")} → true</li>
      *   <li>{@code remove("Z")} → false</li>
      * </ul>
      *
-     * @p.recond Lista = ["A", "B", "C"].
+     * @precondition.test Lista = ["A", "B", "C"].
      *
-     * @p.ostcond Lista = ["A", "C"].
+     * @postcondition.test Lista = ["A", "C"].
      *
-     * @r.esult Rimozione valida restituisce {@code true}, invalida {@code false}.
+     * @result.test Rimozione valida restituisce {@code true}, invalida {@code false}.
      */
     @Test
     public void testRemoveByObject() {
@@ -325,22 +329,22 @@ public class ListAdapterTest {
     /**
      * Test dei metodi {@link myAdapter.HList#indexOf(Object)} e {@link myAdapter.HList#lastIndexOf(Object)}.
      *
-     * @s.ummary Verifica il comportamento delle ricerche di primo e ultimo indice di un elemento.
+     * @summary.test Verifica il comportamento delle ricerche di primo e ultimo indice di un elemento.
      *
-     * @d.esign Inserisce ["A", "B", "A", "C"], verifica gli indici di "A", "B" e un elemento assente.
+     * @design.test Inserisce ["A", "B", "A", "C"], verifica gli indici di "A", "B" e un elemento assente.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code indexOf("A")} → 0</li>
      *   <li>{@code lastIndexOf("A")} → 2</li>
      *   <li>{@code indexOf("Z")} → -1</li>
      * </ul>
      *
-     * @p.recond Lista = ["A", "B", "A", "C"].
+     * @precondition.test Lista = ["A", "B", "A", "C"].
      *
-     * @p.ostcond Lista invariata.
+     * @postcondition.test Lista invariata.
      *
-     * @r.esult Indici corretti restituiti per elementi presenti/assenti.
+     * @result.test Indici corretti restituiti per elementi presenti/assenti.
      */
     @Test
     public void testIndexOfAndLastIndexOf() {
@@ -358,11 +362,11 @@ public class ListAdapterTest {
     /**
      * Test dei metodi {@link myAdapter.HCollection#contains(Object)} e {@link myAdapter.HCollection#containsAll(HCollection)}.
      *
-     * @s.ummary Verifica la presenza di singoli elementi e collezioni all’interno della lista.
+     * @summary.test Verifica la presenza di singoli elementi e collezioni all’interno della lista.
      *
-     * @d.esign Crea lista ["A","B","C"] e collezione ["A","C"], verifica i metodi.
+     * @design.test Crea lista ["A","B","C"] e collezione ["A","C"], verifica i metodi.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code contains("B")} → true</li>
      *   <li>{@code contains("Z")} → false</li>
@@ -370,11 +374,11 @@ public class ListAdapterTest {
      *   <li>{@code containsAll(["A","C","Z"])} → false</li>
      * </ul>
      *
-     * @p.recond Lista popolata; collezioni create.
+     * @precondition.test Lista popolata; collezioni create.
      *
-     * @p.ostcond Lista invariata.
+     * @postcondition.test Lista invariata.
      *
-     * @r.esult Ritorni corretti per i metodi {@code contains} e {@code containsAll}.
+     * @result.test Ritorni corretti per i metodi {@code contains} e {@code containsAll}.
      */
     @Test
     public void testContainsAndContainsAll() {
@@ -397,22 +401,22 @@ public class ListAdapterTest {
     /**
      * Test dei metodi {@link myAdapter.HCollection#addAll(HCollection)}, {@link myAdapter.HCollection#removeAll(HCollection)} e {@link myAdapter.HCollection#retainAll(HCollection)}.
      *
-     * @s.ummary Verifica operazioni di aggiunta, rimozione e intersezione di collezioni.
+     * @summary.test Verifica operazioni di aggiunta, rimozione e intersezione di collezioni.
      *
-     * @d.esign Lavora su ["X","Y","Z"] e verifica effetto dei metodi addAll, removeAll e retainAll.
+     * @design.test Lavora su ["X","Y","Z"] e verifica effetto dei metodi addAll, removeAll e retainAll.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code addAll(["X","Y","Z"])} → aggiunge tutti</li>
      *   <li>{@code removeAll(["X","B"])} → rimuove "X"</li>
      *   <li>{@code retainAll(["Z","A"])} → mantiene "Z", "A"</li>
      * </ul>
      *
-     * @p.recond Lista inizialmente vuota; collezioni create.
+     * @precondition.test Lista inizialmente vuota; collezioni create.
      *
-     * @p.ostcond Lista aggiornata coerentemente con operazioni.
+     * @postcondition.test Lista aggiornata coerentemente con operazioni.
      *
-     * @r.esult Le tre operazioni modificano correttamente la lista.
+     * @result.test Le tre operazioni modificano correttamente la lista.
      */
     @Test
     public void testAddAllRemoveAllRetainAll() {
@@ -464,20 +468,20 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HCollection#clear()}.
      *
-     * @s.ummary Verifica che la lista venga svuotata correttamente.
+     * @summary.test Verifica che la lista venga svuotata correttamente.
      *
-     * @d.esign Aggiunge elementi, chiama {@code clear()} e verifica che {@code size()==0} e {@code isEmpty()==true}.
+     * @design.test Aggiunge elementi, chiama {@code clear()} e verifica che {@code size()==0} e {@code isEmpty()==true}.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code list.clear()}</li>
      * </ul>
      *
-     * @p.recond Lista con ["A", "B"].
+     * @precondition.test Lista con ["A", "B"].
      *
-     * @p.ostcond Lista vuota.
+     * @postcondition.test Lista vuota.
      *
-     * @r.esult Dopo clear, {@code size()==0}, {@code isEmpty()==true}.
+     * @result.test Dopo clear, {@code size()==0}, {@code isEmpty()==true}.
      */
     @Test
     public void testClear() {
@@ -492,22 +496,22 @@ public class ListAdapterTest {
     /**
      * Test dei metodi {@link myAdapter.HList#equals(Object)} e {@link myAdapter.HList#hashCode()}.
      *
-     * @s.ummary Verifica uguaglianza e hashCode coerenti tra liste uguali e diversi tra liste diverse.
+     * @summary.test Verifica uguaglianza e hashCode coerenti tra liste uguali e diversi tra liste diverse.
      *
-     * @d.esign Confronta liste con stessi elementi, poi aggiunge un elemento a una delle due.
+     * @design.test Confronta liste con stessi elementi, poi aggiunge un elemento a una delle due.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code list1.equals(list2)} → true</li>
      *   <li>{@code list1.hashCode() == list2.hashCode()}</li>
      *   <li>Modifica list2 e verifica {@code equals()} → false</li>
      * </ul>
      *
-     * @p.recond Entrambe le liste sono inizialmente vuote.
+     * @precondition.test Entrambe le liste sono inizialmente vuote.
      *
-     * @p.ostcond list2 contiene un elemento in più.
+     * @postcondition.test list2 contiene un elemento in più.
      *
-     * @r.esult Uguaglianza e hash coerenti con contenuto.
+     * @result.test Uguaglianza e hash coerenti con contenuto.
      */
     @Test
     public void testEqualsAndHashCode() {
@@ -530,21 +534,21 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HCollection#toArray()}.
      *
-     * @s.ummary Verifica che {@code toArray()} restituisca un array con tutti gli elementi in ordine.
+     * @summary.test Verifica che {@code toArray()} restituisca un array con tutti gli elementi in ordine.
      *
-     * @d.esign Aggiunge tre elementi e controlla array ritornato.
+     * @design.test Aggiunge tre elementi e controlla array ritornato.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code toArray()} restituisce un array di size == 3</li>
      *   <li>Contenuto = ["A", "B", "C"]</li>
      * </ul>
      *
-     * @p.recond Lista = ["A", "B", "C"].
+     * @precondition.test Lista = ["A", "B", "C"].
      *
-     * @p.ostcond Lista invariata.
+     * @postcondition.test Lista invariata.
      *
-     * @r.esult Array con contenuto identico e ordinato.
+     * @result.test Array con contenuto identico e ordinato.
      */
     @Test
     public void testToArray() {
@@ -562,21 +566,21 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HCollection#toArray(Object[])}.
      *
-     * @s.ummary Verifica che {@code toArray(T[])} riempia l’array passato o ne crei uno nuovo.
+     * @summary.test Verifica che {@code toArray(T[])} riempia l’array passato o ne crei uno nuovo.
      *
-     * @d.esign Due test: uno con array abbastanza grande, uno con array troppo piccolo.
+     * @design.test Due test: uno con array abbastanza grande, uno con array troppo piccolo.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>array1.length == 3 → restituito e riempito</li>
      *   <li>array2.length == 1 → viene creato nuovo array</li>
      * </ul>
      *
-     * @p.recond Lista = ["X", "Y"].
+     * @precondition.test Lista = ["X", "Y"].
      *
-     * @p.ostcond Lista invariata.
+     * @postcondition.test Lista invariata.
      *
-     * @r.esult Comportamento conforme alla specifica.
+     * @result.test Comportamento conforme alla specifica.
      */
     @Test
     public void testToArrayWithParameter() {
@@ -600,21 +604,21 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HCollection#iterator()}.
      *
-     * @s.ummary Verifica che l’iteratore restituisca correttamente tutti gli elementi in ordine.
+     * @summary.test Verifica che l’iteratore restituisca correttamente tutti gli elementi in ordine.
      *
-     * @d.esign Inserisce ["A", "B", "C"] e scorre l’iteratore usando {@code hasNext()} e {@code next()}.
+     * @design.test Inserisce ["A", "B", "C"] e scorre l’iteratore usando {@code hasNext()} e {@code next()}.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>Scorre l’iteratore con {@code next()}</li>
      *   <li>Controlla i valori restituiti</li>
      * </ul>
      *
-     * @p.recond Lista = ["A", "B", "C"].
+     * @precondition.test Lista = ["A", "B", "C"].
      *
-     * @p.ostcond Iteratore esaurito, lista invariata.
+     * @postcondition.test Iteratore esaurito, lista invariata.
      *
-     * @r.esult {@code next()} restituisce tutti gli elementi, {@code hasNext()} è false alla fine.
+     * @result.test {@code next()} restituisce tutti gli elementi, {@code hasNext()} è false alla fine.
      */
     @Test
     public void testIterator() {
@@ -635,21 +639,21 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HIterator#next()} oltre la fine.
      *
-     * @s.ummary Verifica che {@code next()} lanci {@link java.util.NoSuchElementException} se chiamato oltre la fine.
+     * @summary.test Verifica che {@code next()} lanci {@link java.util.NoSuchElementException} se chiamato oltre la fine.
      *
-     * @d.esign Inserisce un solo elemento e chiama {@code next()} due volte.
+     * @design.test Inserisce un solo elemento e chiama {@code next()} due volte.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code it.next()} → "X"</li>
      *   <li>{@code it.next()} → eccezione</li>
      * </ul>
      *
-     * @p.recond Lista = ["X"].
+     * @precondition.test Lista = ["X"].
      *
-     * @p.ostcond Lista invariata.
+     * @postcondition.test Lista invariata.
      *
-     * @r.esult Deve essere lanciata {@code NoSuchElementException}.
+     * @result.test Deve essere lanciata {@code NoSuchElementException}.
      */
     @Test(expected = java.util.NoSuchElementException.class)
     public void testIteratorNextNoSuchElement() {
@@ -662,21 +666,21 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HIterator#remove()} chiamato prima di {@code next()}.
      *
-     * @s.ummary Verifica che {@code remove()} lanci {@link IllegalStateException} se chiamato prima di {@code next()}.
+     * @summary.test Verifica che {@code remove()} lanci {@link IllegalStateException} se chiamato prima di {@code next()}.
      *
-     * @d.esign Crea iteratore e chiama direttamente {@code remove()}.
+     * @design.test Crea iteratore e chiama direttamente {@code remove()}.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>Lista = ["Y"]</li>
      *   <li>{@code it.remove()} → eccezione</li>
      * </ul>
      *
-     * @p.recond Lista con un solo elemento.
+     * @precondition.test Lista con un solo elemento.
      *
-     * @p.ostcond Lista invariata.
+     * @postcondition.test Lista invariata.
      *
-     * @r.esult Deve essere lanciata {@code IllegalStateException}.
+     * @result.test Deve essere lanciata {@code IllegalStateException}.
      */
     @Test(expected = IllegalStateException.class)
     public void testIteratorRemoveBeforeNext() {
@@ -688,21 +692,21 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HIterator#remove()} dopo {@code next()}.
      *
-     * @s.ummary Verifica che {@code remove()} elimini l’ultimo elemento visitato.
+     * @summary.test Verifica che {@code remove()} elimini l’ultimo elemento visitato.
      *
-     * @d.esign Inserisce ["1","2"], chiama {@code next()}, poi {@code remove()} e verifica contenuto.
+     * @design.test Inserisce ["1","2"], chiama {@code next()}, poi {@code remove()} e verifica contenuto.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code next()} → "1"</li>
      *   <li>{@code remove()} → rimuove "1"</li>
      * </ul>
      *
-     * @p.recond Lista = ["1", "2"].
+     * @precondition.test Lista = ["1", "2"].
      *
-     * @p.ostcond Lista = ["2"].
+     * @postcondition.test Lista = ["2"].
      *
-     * @r.esult Elemento correttamente rimosso.
+     * @result.test Elemento correttamente rimosso.
      */
     @Test
     public void testIteratorRemove() {
@@ -720,21 +724,21 @@ public class ListAdapterTest {
      * Test dei metodi {@link myAdapter.HListIterator#next()}, {@link myAdapter.HListIterator#previous()},
      * {@link myAdapter.HListIterator#hasNext()}, {@link myAdapter.HListIterator#hasPrevious()}.
      *
-     * @s.ummary Verifica che {@code listIterator()} permetta navigazione avanti/indietro corretta.
+     * @summary.test Verifica che {@code listIterator()} permetta navigazione avanti/indietro corretta.
      *
-     * @d.esign Inserisce ["A","B","C"], avanza e poi torna indietro con l’iteratore.
+     * @design.test Inserisce ["A","B","C"], avanza e poi torna indietro con l’iteratore.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code next()} due volte → "A", "B"</li>
      *   <li>{@code previous()} due volte → "B", "A"</li>
      * </ul>
      *
-     * @p.recond Lista = ["A","B","C"].
+     * @precondition.test Lista = ["A","B","C"].
      *
-     * @p.ostcond Iteratore torna all’inizio; lista invariata.
+     * @postcondition.test Iteratore torna all’inizio; lista invariata.
      *
-     * @r.esult Navigazione avanti/indietro funziona correttamente.
+     * @result.test Navigazione avanti/indietro funziona correttamente.
      */
     @Test
     public void testListIteratorForwardBackward() {
@@ -755,20 +759,20 @@ public class ListAdapterTest {
     /**
      * Test dei metodi {@link myAdapter.HListIterator#add(Object)}, {@link myAdapter.HListIterator#set(Object)}, {@link myAdapter.HListIterator#remove()}.
      *
-     * @s.ummary Verifica comportamento dell’iteratore bidirezionale nelle modifiche alla lista.
+     * @summary.test Verifica comportamento dell’iteratore bidirezionale nelle modifiche alla lista.
      *
-     * @d.esign
+     * @design.test
      * <ol>
      *   <li>Aggiunge "X" con {@code add()}</li>
      *   <li>Modifica "X" con {@code set("Y")}</li>
      *   <li>Rimuove "Y" con {@code remove()}</li>
      * </ol>
      *
-     * @p.recond Lista vuota.
+     * @precondition.test Lista vuota.
      *
-     * @p.ostcond Lista tornata vuota.
+     * @postcondition.test Lista tornata vuota.
      *
-     * @r.esult Tutte le operazioni effettuano correttamente la modifica attesa.
+     * @result.test Tutte le operazioni effettuano correttamente la modifica attesa.
      */
     @Test
     public void testListIteratorAddSetRemove() {
@@ -789,20 +793,20 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HListIterator#set(Object)} chiamato prima di {@code next()}.
      *
-     * @s.ummary Verifica che venga lanciata {@link IllegalStateException} se {@code set()} è chiamato senza elemento corrente.
+     * @summary.test Verifica che venga lanciata {@link IllegalStateException} se {@code set()} è chiamato senza elemento corrente.
      *
-     * @d.esign Inserisce "A" e chiama {@code set("B")} senza {@code next()}.
+     * @design.test Inserisce "A" e chiama {@code set("B")} senza {@code next()}.
      *
-     * @d.escription
+     * @description.test
      * <ul>
      *   <li>{@code it.set("B")} → eccezione</li>
      * </ul>
      *
-     * @p.recond Lista = ["A"].
+     * @precondition.test Lista = ["A"].
      *
-     * @p.ostcond Lista invariata.
+     * @postcondition.test Lista invariata.
      *
-     * @r.esult Deve essere lanciata {@code IllegalStateException}.
+     * @result.test Deve essere lanciata {@code IllegalStateException}.
      */
     @Test(expected = IllegalStateException.class)
     public void testListIteratorSetBeforeNext() {
@@ -814,15 +818,15 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HListIterator#next()} oltre la fine della lista.
      *
-     * @s.ummary Verifica che {@code next()} lanci {@link java.util.NoSuchElementException} quando non ci sono più elementi.
+     * @summary.test Verifica che {@code next()} lanci {@link java.util.NoSuchElementException} quando non ci sono più elementi.
      *
-     * @d.esign Inserisce "A", chiama {@code next()} due volte.
+     * @design.test Inserisce "A", chiama {@code next()} due volte.
      *
-     * @p.recond Lista = ["A"].
+     * @precondition.test Lista = ["A"].
      *
-     * @p.ostcond Lista invariata.
+     * @postcondition.test Lista invariata.
      *
-     * @r.esult Deve essere lanciata {@code NoSuchElementException}.
+     * @result.test Deve essere lanciata {@code NoSuchElementException}.
      */
     @Test(expected = java.util.NoSuchElementException.class)
     public void testListIteratorNextTooFar() {
@@ -835,20 +839,20 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#subList(int, int)} e operazioni sulla vista risultante.
      *
-     * @s.ummary Verifica che la subList sia una vista sulla lista padre e che le modifiche siano riflesse.
+     * @summary.test Verifica che la subList sia una vista sulla lista padre e che le modifiche siano riflesse.
      *
-     * @d.esign
+     * @design.test
      * <ul>
      *   <li>Crea subList [1,3] → ["B", "C"]</li>
      *   <li>Rimuove "B" dalla sublist</li>
      *   <li>Modifica "D" in "Z" nella lista padre</li>
      * </ul>
      *
-     * @p.recond Lista = ["A", "B", "C", "D"].
+     * @precondition.test Lista = ["A", "B", "C", "D"].
      *
-     * @p.ostcond Lista = ["A", "C", "Z"]; subList = ["C"].
+     * @postcondition.test Lista = ["A", "C", "Z"]; subList = ["C"].
      *
-     * @r.esult Sublist riflette correttamente le modifiche bidirezionali.
+     * @result.test Sublist riflette correttamente le modifiche bidirezionali.
      */
     @Test
     public void testSubListView() {
@@ -876,15 +880,15 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#addAll(int, HCollection)}.
      *
-     * @s.ummary Verifica inserimento di una collezione in posizione intermedia.
+     * @summary.test Verifica inserimento di una collezione in posizione intermedia.
      *
-     * @d.esign Lista = ["A", "D"]; collezione = ["B", "C"]; inserimento in indice 1.
+     * @design.test Lista = ["A", "D"]; collezione = ["B", "C"]; inserimento in indice 1.
      *
-     * @p.recond Lista e collezione create.
+     * @precondition.test Lista e collezione create.
      *
-     * @p.ostcond Lista = ["A", "B", "C", "D"].
+     * @postcondition.test Lista = ["A", "B", "C", "D"].
      *
-     * @r.esult Elementi correttamente inseriti.
+     * @result.test Elementi correttamente inseriti.
      */
     @Test
     public void testAddAllAtIndex() {
@@ -906,15 +910,15 @@ public class ListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#addAll(int, HCollection)} con indice invalido.
      *
-     * @s.ummary Verifica lancio di {@link IndexOutOfBoundsException} se l’indice è maggiore di {@code size()}.
+     * @summary.test Verifica lancio di {@link IndexOutOfBoundsException} se l’indice è maggiore di {@code size()}.
      *
-     * @d.esign Lista vuota, tenta inserimento in indice 1.
+     * @design.test Lista vuota, tenta inserimento in indice 1.
      *
-     * @p.recond Lista vuota, collezione = ["X"].
+     * @precondition.test Lista vuota, collezione = ["X"].
      *
-     * @p.ostcond Lista invariata.
+     * @postcondition.test Lista invariata.
      *
-     * @r.esult Deve essere lanciata {@code IndexOutOfBoundsException}.
+     * @result.test Deve essere lanciata {@code IndexOutOfBoundsException}.
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testAddAllAtInvalidIndex() {

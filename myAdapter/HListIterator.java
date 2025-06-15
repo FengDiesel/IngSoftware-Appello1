@@ -2,7 +2,8 @@ package myAdapter;
 
 /**
  * Interfaccia per l'iterazione bidirezionale su una lista.
- * Simula {@code java.util.ListIterator}
+ * <p>
+ * Simula {@link java.util.ListIterator} secondo la specifica J2SE 1.4.2.
  */
 
 public interface HListIterator {
@@ -58,9 +59,10 @@ public interface HListIterator {
     void remove();
 
     /**
-     * Sostituisce l'ultimo elemento che e' stato restituito con uno nuovo.
-     * @param o nuovo valore
-     * @throws IllegalStateException se {@code next()} o {@code previous()} non è stato ancora chiamato
+     * Sostituisce l'ultimo elemento restituito da {@code next()} o {@code previous()} con il valore specificato.
+     *
+     * @param o nuovo valore da impostare
+     * @throws IllegalStateException se {@code next()} o {@code previous()} non è stato ancora chiamato o se {@code remove()} o {@code add()} sono stati chiamati dopo l’ultima chiamata a {@code next()} o {@code previous()}
      */
     void set(Object o);
 

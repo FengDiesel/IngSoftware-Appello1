@@ -1,8 +1,9 @@
 package myAdapter;
 
 /**
- * Interfaccia che estende {@code HCollection} e rappresenta una lista.
- * Simula {@code java.util.List}
+ * Interfaccia che estende {@link HCollection} e rappresenta una lista ordinata e indicizzata.
+ * <p>
+ * Simula l'interfaccia {@code java.util.List} secondo la specifica J2SE 1.4.2.
  */
 
 public interface HList {
@@ -163,11 +164,12 @@ public interface HList {
     int size();
 
     /**
-     * Retituisce una vista di una porzione della lista.
-     * @param fromIndex indice iniziale (incluso)
-     * @param toIndex indice finale (escluso)
-     * @return sottolista
-     * @throws IndexOutOfBoundsException se i limiti non validi
+     * Restituisce una vista di una porzione della lista, compresa tra {@code fromIndex} (inclusivo) e {@code toIndex} (esclusivo).
+     *
+     * @param fromIndex indice iniziale, incluso
+     * @param toIndex indice finale, escluso
+     * @return sottolista contenente gli elementi nell'intervallo specificato
+     * @throws IndexOutOfBoundsException se gli indici sono fuori dal range valido o {@code fromIndex > toIndex}
      */
     HList subList(int fromIndex, int toIndex);
 
