@@ -24,7 +24,7 @@ public interface HList {
     boolean add(Object o);
 
     /**
-     * Aggiunge tutti gli elementi della collezione alla fine della lista.
+     * Agiunge tutti gli elementi della collezione alla fine della lista.
      * @param c collezione da inserire
      * @return {@code true} se la lista è stata modificata
      */
@@ -74,7 +74,7 @@ public interface HList {
     Object get(int index);
 
     /**
-     * Restituisce l'hash code della lista.
+     * Restituisce l'hash della lista.
      * @return hash della lista
      */
     int hashCode();
@@ -87,7 +87,7 @@ public interface HList {
     int indexOf(Object o);
 
     /**
-     * Verifica se la lista è vuota.
+     * Verifica se la lista è vuota
      * @return {@code true} se non contiene elementi
      */
     boolean isEmpty();
@@ -122,7 +122,7 @@ public interface HList {
     /**
      * Rimuove l' elemento alla posizione inserita.
      * @param index posizione
-     * @return elemento rimosso
+     * @return elemnto rimosso
      * @throws IndexOutOfBoundsException se l'indice non valido
      */
     Object 	remove(int index);
@@ -174,7 +174,7 @@ public interface HList {
     HList subList(int fromIndex, int toIndex);
 
     /**
-     * Restituisce un array contenente tutti gli elementi in ordine.
+     * Restituisce array contenente tutti gli elementi in ordine.
      * @return array di oggetti
      */
     Object[] toArray();

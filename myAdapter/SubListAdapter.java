@@ -76,6 +76,7 @@ public class SubListAdapter implements HList {
         return parent.get(offset + index);
     }
 
+
     /**
      * Sostituisce l'elemento all'indice specificato con il nuovo valore fornito.
      * @param index posizione dell'elemento da modificare
@@ -252,11 +253,12 @@ public class SubListAdapter implements HList {
     }
     
     /**
-     * Rimuove dalla sottolista tutti gli elementi presenti nella collezione specificata.
+     * Rimuove dalla sotolista tutti gli elementi presenti nella collezione specificata.
      * L'operazione si riflette sulla lista padre.
      *
      * @param c collezione contenente gli elementi da rimuovere
      * @return {@code true} se la sottolista è stata modificata
+     * 
      * @throws NullPointerException se la collezione è null
      */
     @Override
@@ -407,7 +409,8 @@ public class SubListAdapter implements HList {
     }
 
     /**
-     * Restituisce un iteratore sulla sottolista.
+     * Restituisce un iteratore sulla sottolista
+     * 
      *
      * @return un {@code HIterator} sugli elementi della sottolista
      */

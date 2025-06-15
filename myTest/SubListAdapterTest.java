@@ -69,8 +69,10 @@ public class SubListAdapterTest {
         assertFalse(sub.isEmpty());
 
         ListAdapter parent = new ListAdapter();
+
         parent.add("a");
         parent.add("b");
+
         SubListAdapter subEmpty = new SubListAdapter(parent, 2, 2); // sub vuota
         assertEquals(0, subEmpty.size());
         assertTrue(subEmpty.isEmpty());
@@ -99,6 +101,7 @@ public class SubListAdapterTest {
     @Test
     public void testGetFromSubList() {
         sub = new SubListAdapter(parent, 1, 4);
+
         assertEquals("B", sub.get(0));
         assertEquals("D", sub.get(2));
     }
@@ -130,6 +133,7 @@ public class SubListAdapterTest {
         assertEquals("X", parent.get(2));
         assertEquals(4, sub.size());
         assertEquals(6, parent.size());
+
     }
 
     /**
@@ -214,7 +218,7 @@ public class SubListAdapterTest {
     /**
      * Test del metodo {@link myAdapter.HList#add(Object)}
      * 
-     * @summary.test Verifica che {@code add(Object)} aggiunga un elemento in fondo alla sublist.
+     * @summary.test Verifica che {@code add(Object)} aggiunga un elemento i fondo alla sublist.
      *
      * @design.test Crea una sublist ["B","C","D"], aggiunge "X".
      *
@@ -348,7 +352,7 @@ public class SubListAdapterTest {
      *
      * @description.test {@code sub.addAll(1, c)} → ["B", "X", "Y", "C", "D"]
      *
-     * @precondition.test Lista padre = ["A","B","C","D","E"]
+     * @precondition.test Lista padre = ["A","B","C","D","E"].
      *
      * @postcondition.test sub e parent aggiornate; ordini mantenuti
      *

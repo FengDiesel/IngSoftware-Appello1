@@ -53,7 +53,7 @@ public interface HListIterator extends HIterator{
     int previousIndex();
 
     /**
-     * Rimuove l'ultimo elemento restituito da {@code next()} o {@code previous()}.
+     * Rimuove l ultimo elemento restituito da {@code next()} o {@code previous()}.
      * @throws IllegalStateException se {@code next()} o {@code previous()} non è stato chiamato
      */
     void remove();

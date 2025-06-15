@@ -93,7 +93,6 @@ public class ListAdapter implements HList, HCollection {
 
     }
 
-    //  HCollection  \\
 
     /**
      * Restituisce il numero di elementi nella lista.
@@ -503,5 +502,6 @@ public class ListAdapter implements HList, HCollection {
 
         return i > 0;
     }
+
 
 }
