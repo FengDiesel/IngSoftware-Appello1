@@ -12,6 +12,7 @@ public class TestRunner {
     public static void main(String[] args) {
         Result result = JUnitCore.runClasses(
             ListAdapterTest.class
+            //SubListAdapterTest.class
         );
 
         System.out.println("=== Risultati Test ===");
