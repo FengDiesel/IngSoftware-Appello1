@@ -53,6 +53,11 @@ public class ListAdapterTest {
     public void setUp() {
         list = new ListAdapter();
     }
+
+    /**
+     * Costruttore di default.
+     */
+    public ListAdapterTest(){}
     
     /**
      * Test del metodo {@link myAdapter.HList#isEmpty()} e {@link myAdapter.HList#size()} su una lista vuota.

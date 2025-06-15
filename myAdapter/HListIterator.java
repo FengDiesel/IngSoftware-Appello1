@@ -6,7 +6,7 @@ package myAdapter;
  * Simula {@link java.util.ListIterator} secondo la specifica J2SE 1.4.2.
  */
 
-public interface HListIterator {
+public interface HListIterator extends HIterator{
 
     /**
      * Inserisce un nuovo elemento nella posizione corrente.

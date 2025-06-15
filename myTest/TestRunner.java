@@ -5,32 +5,13 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 /**
- * Classe principale per l'esecuzione automatica dei test del progetto {@code ListAdapter} e {@code SubListAdapter}.
- * <p>
- * <strong>Summary:</strong> Questa classe utilizza {@link org.junit.runner.JUnitCore} per eseguire tutti i test presenti nelle classi
- * {@code ListAdapterTest} e {@code SubListAdapterTest}. Al termine dell'esecuzione, stampa un riepilogo con:
- * <ul>
- *   <li>Numero totale di test eseguiti</li>
- *   <li>Numero di test falliti</li>
- *   <li>Dettagli dei fallimenti (inclusi stack trace)</li>
- * </ul>
- *
- * <p>
- * <strong>Design:</strong> L’esecuzione è orchestrata tramite il metodo statico {@code runClasses(Class...)} della classe {@code JUnitCore}.
- * Questo approccio consente di lanciare i test senza l'uso di IDE o plugin esterni.
- *
- * <p>
- * <strong>Dipendenze:</strong>
- * <ul>
- *   <li>{@link ListAdapterTest}</li>
- *   <li>{@link SubListAdapterTest}</li>
- *   <li>{@code junit-4.13.2.jar}</li>
- * </ul>
- *
- * <p>
- * <strong>Note:</strong> La libreria JUnit deve essere inclusa nel classpath, e i test devono essere compatibili con la versione 4.13.2.
+ * Classe che avvia l'esecuzione dei test JUnit per il progetto.
  */
 public class TestRunner {
+
+    /** Costrutore di default */
+    public TestRunner(){}
+
     /**
      * Main per l'esecuzione dei test JUnit.
      *
@@ -61,8 +42,17 @@ public class TestRunner {
         );
 
         System.out.println("=== Risultati Test ===");
-        System.out.println("Totale test eseguiti: " + result.getRunCount());
-        System.out.println("Numero di fallimenti: " + result.getFailureCount());
+        int total = result.getRunCount();
+        int failures = result.getFailureCount();
+        int passed = total - failures;
+        long time = result.getRunTime();
+        
+
+        System.out.println("Totale test eseguiti : " + total);
+        System.out.println("Test superati     : " + passed);
+        System.out.println("Test falliti      : " + failures);
+        System.out.println("Tempo impiegato    : " + time + " ms");
+        System.out.println("======================");
 
         if (!result.wasSuccessful()) {
             System.out.println("--- Dettagli fallimenti ---");

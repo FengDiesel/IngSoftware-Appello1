@@ -7,7 +7,6 @@ import java.util.Vector;
  * <p>
  * Fornisce una lista compatibile con le specifiche Java 1.4.2 e CLDC 1.1.
  */
-
 public class ListAdapter implements HList, HCollection {
 
     /** Lista sottostante che contiene gli elementi. */
@@ -39,6 +38,10 @@ public class ListAdapter implements HList, HCollection {
         /** Ultima posizione restituita da next o previous. */
         int lastRet = -1;
 
+        /** Costruttore
+         * 
+         * @param index indice iteratore
+         */
         public ListIteratorAdapter(int index) {
             this.cursor = index;
         }
@@ -142,6 +145,13 @@ public class ListAdapter implements HList, HCollection {
          * Indice dell'ultimo elemento restituito; -1 se nessuno.
          */
         int lastRet = -1;
+
+        /**
+         * Costruttore dell'iteratore per {@code ListAdapter}.
+         */
+        public IteratorAdapter() {
+            // o qualsiasi corpo esistente
+        }
 
         public boolean hasNext() {
             return cursor < delegate.size();
